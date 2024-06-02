@@ -1,7 +1,6 @@
 package com.personal.userManagement_app.web.controllers;
 
 import com.personal.userManagement_app.model.dto.UserCreateDTO;
-import com.personal.userManagement_app.model.dto.UserUpdateDTO;
 import com.personal.userManagement_app.model.entity.UserEntity;
 import com.personal.userManagement_app.services.UserService;
 import jakarta.validation.Valid;
@@ -38,16 +37,17 @@ public class UserRestController {
     }
 
 
-    @PutMapping("/edit")
-    public ResponseEntity<Object> editProfile(@Valid @RequestBody UserUpdateDTO updateDTO, BindingResult bindingResult) {
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Object> editProfile(@PathVariable("id") Long id,
+                                              @Valid @RequestBody UserCreateDTO createDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             bindingResult.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
-        this.userService.update(updateDTO);
-        return ResponseEntity.ok(updateDTO);
+        this.userService.update(createDTO, id);
+        return ResponseEntity.ok(createDTO);
     }
 
     @DeleteMapping("/delete/{id}")

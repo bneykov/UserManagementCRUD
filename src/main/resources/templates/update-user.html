@@ -116,7 +116,6 @@
                 event.preventDefault();
 
                 let user = {
-                    id: id,
                     firstName: $('#firstName').val(),
                     lastName: $('#lastName').val(),
                     email: $('#email').val(),
@@ -127,7 +126,7 @@
                 $.ajax({
                     type: 'PUT',
                     contentType: 'application/json',
-                    url: '/api/users/edit',
+                    url: '/api/users/edit/' + id,
                     data: JSON.stringify(user),
                     success: function (response) {
 

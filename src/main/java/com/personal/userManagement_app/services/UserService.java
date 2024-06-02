@@ -1,7 +1,6 @@
 package com.personal.userManagement_app.services;
 
 import com.personal.userManagement_app.model.dto.UserCreateDTO;
-import com.personal.userManagement_app.model.dto.UserUpdateDTO;
 import com.personal.userManagement_app.model.entity.UserEntity;
 import com.personal.userManagement_app.repositories.UserRepository;
 import com.personal.userManagement_app.utils.errors.UserNotFoundException;
@@ -48,9 +47,10 @@ public class UserService {
     }
 
 
-    public void update(UserUpdateDTO updateDTO) {
-        UserEntity user = this.findById(updateDTO.getId());
-        user = this.modelMapper.map(updateDTO, UserEntity.class);
+    public void update(UserCreateDTO createDTO, Long id) {
+        UserEntity user = this.findById(id);
+        user = this.modelMapper.map(createDTO, UserEntity.class);
+        user.setId(id);
         this.userRepository.save(user);
     }
 
