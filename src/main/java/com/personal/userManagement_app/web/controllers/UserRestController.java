@@ -38,7 +38,7 @@ public class UserRestController {
     }
 
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/edit")
     public ResponseEntity<Object> editProfile(@Valid @RequestBody UserUpdateDTO updateDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = new HashMap<>();

@@ -49,11 +49,12 @@ public class UserService {
 
 
     public void update(UserUpdateDTO updateDTO) {
-        UserEntity user = this.modelMapper.map(updateDTO, UserEntity.class);
+        UserEntity user = this.findById(updateDTO.getId());
+        user = this.modelMapper.map(updateDTO, UserEntity.class);
         this.userRepository.save(user);
     }
 
     public void delete(Long id) {
-        this.userRepository.deleteById(id);
+        this.userRepository.delete(this.findById(id));
     }
 }
