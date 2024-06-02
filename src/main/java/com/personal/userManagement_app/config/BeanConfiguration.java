@@ -15,9 +15,16 @@ public class BeanConfiguration {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        modelMapper.addConverter((Converter<String, LocalDate>) mappingContext -> LocalDate
-                .parse(mappingContext.getSource(),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        modelMapper.addConverter(new Converter<String, LocalDate>() {
+            @Override
+            public LocalDate convert(MappingContext<String, LocalDate> mappingContext) {
+
+                return LocalDate
+                        .parse(mappingContext.getSource(),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+        });
+
         return modelMapper;
     }
 }
