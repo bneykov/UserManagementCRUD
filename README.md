@@ -24,7 +24,7 @@ Run the following command to install the dependencies, defined in the pom.xml fi
 ```bash
 mvn clean install
 ```
-5. Set your database username and password in the application.yml file under spring:datasource. 
+5. Set your database username and password in  _src/main/resources/application.yml_  under spring:datasource. 
 
 6. Run the application
 
@@ -35,6 +35,8 @@ mvn spring-boot:run
 
 ## Usage
  The application runs on port 8000 by default (http://localhost:8000/). This can be changed in the application.yml file under server:port.
+
+ The application will create a database on startup with the name liqubase_db and will execute the SQL scripts located in _src/main/resources/db/changelog/scripts_.
 
 ### The API consists of the following endpoints
 
