@@ -60,7 +60,6 @@ public class UserRestController {
     public ResponseEntity<List<UserEntity>> all(@RequestParam(value = "keyword", required = false) String keyword) {
         if (keyword == null || keyword.isBlank() || keyword.equals("null")) {
             List<UserEntity> users = this.userService.findAllSortedByLastNameAndDateOfBirth();
-            System.out.println();
             return ResponseEntity.ok().body(users);
         }
         return ResponseEntity.ok().body(this.userService.searchAllSortedByLastNameAndDateOfBirth(keyword));
